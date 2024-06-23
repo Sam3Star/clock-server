@@ -16,5 +16,5 @@ public class RoutineEntity extends BaseTimeEntity {
     @Column(name = "routine_id", nullable = false)
     private Long routineId;
 
-
+//    private
 }
