@@ -11,4 +11,4 @@
 - remove: 코드 삭제에 대한 커밋
 
   ### Pipe Line
-<img width="855" alt="스크린샷 2024-06-23 오후 5 09 14" src="https://github.com/Sam3Star/clock-server/assets/113758782/8ffd968e-17b6-4f96-8d32-139750bd53a4">
+<img width="776" alt="스크린샷 2024-06-23 오후 5 10 39" src="https://github.com/Sam3Star/clock-server/assets/113758782/23a5482a-7035-4d5a-b4c3-e8f4728a54af">
