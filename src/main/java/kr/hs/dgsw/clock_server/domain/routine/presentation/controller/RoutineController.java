@@ -35,4 +35,13 @@ public class RoutineController {
         routineService.update(req, id);
         return Response.of(HttpStatus.OK, "수정성공");
     }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "delete routine", description = "delete routine")
+    public Response delete(
+            @PathVariable Long id
+    ){
+        routineService.delete(id);
+        return Response.of(HttpStatus.OK, "삭제성공");
+    }
 }

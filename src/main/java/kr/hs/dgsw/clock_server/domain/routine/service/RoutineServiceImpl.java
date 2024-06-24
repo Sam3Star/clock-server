@@ -35,8 +35,15 @@ public class RoutineServiceImpl implements RoutineService{
         routineEntity.updateRoutine(req.getName(), req.getImportanceEnum(), req.getColorEnum());
 
         routineRepository.save(routineEntity);
-
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Long id) {
+        RoutineEntity routineEntity = routineRepository.findById(id)
+                .orElseThrow(IllegalArgumentException::new);
+
+        routineRepository.delete(routineEntity);
+    }
 
 }
