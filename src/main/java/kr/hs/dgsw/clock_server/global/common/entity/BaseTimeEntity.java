@@ -1,28 +1,33 @@
 package kr.hs.dgsw.clock_server.global.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@EntityListeners(AuditingEntityListener.class)
-@MappedSuperclass
 @Getter
-@Setter
-@Table(name="tbl_base_time")
-public class BaseTimeEntity {
+@SuperBuilder
+@MappedSuperclass
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
+public abstract class BaseTimeEntity {
     @CreatedDate
-    @Column(name = "created_time",nullable = false, updatable = false)
-    protected LocalDate createdDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    protected LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column(name="modified_time",nullable = false, updatable = false)
-    protected LocalDate modifiedDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    protected LocalDateTime modifiedDate;
 }
