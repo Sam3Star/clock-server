@@ -54,4 +54,13 @@ public class RoutineController {
     public ResponseData<List<RoutineLoadRes>> loadAll(){
         return ResponseData.of(HttpStatus.OK, "불러오기 성공", routineService.loadRoutine());
     }
+
+    @PatchMapping("/set/{id}")
+    @Operation(summary = "set state", description = "set state")
+    public Response setState(
+             @PathVariable Long id
+    ){
+        routineService.setState(id);
+        return Response.of(HttpStatus.OK, "상태수정 성공");
+    }
 }

@@ -1,23 +1,21 @@
 package kr.hs.dgsw.clock_server.domain.routine.service;
 
 import kr.hs.dgsw.clock_server.domain.routine.entity.RoutineEntity;
-import kr.hs.dgsw.clock_server.domain.routine.mapper.RoutineMapper;
 import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.req.RoutineGenerateReq;
 import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.res.RoutineLoadRes;
 import kr.hs.dgsw.clock_server.domain.routine.repository.RoutineRepository;
+import kr.hs.dgsw.clock_server.global.common.enums.State;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class RoutineServiceImpl implements RoutineService{
     private final RoutineRepository routineRepository;
-    private final RoutineMapper routineMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -26,6 +24,7 @@ public class RoutineServiceImpl implements RoutineService{
                 .name(req.getName())
                 .importanceEnum(req.getImportanceEnum())
                 .colorEnum(req.getColorEnum())
+                .state(State.active)
                 .build());
     }
 
@@ -64,4 +63,16 @@ public class RoutineServiceImpl implements RoutineService{
         return routineLoadResList;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void setState(Long id) {
+        RoutineEntity routineEntity = routineRepository.findById(id)
+                .orElseThrow(IllegalArgumentException::new);
+
+        if (routineEntity.getState().equals(State.active)){
+            routineEntity.setState(State.finish);
+        }else {
+            routineEntity.setState(State.active);
+        }
+    }
 }

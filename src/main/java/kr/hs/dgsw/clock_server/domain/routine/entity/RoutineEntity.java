@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kr.hs.dgsw.clock_server.global.common.entity.BaseTimeEntity;
 import kr.hs.dgsw.clock_server.global.common.enums.ColorEnum;
 import kr.hs.dgsw.clock_server.global.common.enums.ImportanceEnum;
+import kr.hs.dgsw.clock_server.global.common.enums.State;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,9 +32,16 @@ public class RoutineEntity extends BaseTimeEntity {
     @Column(name = "color", nullable = false)
     private ColorEnum colorEnum;
 
+    @Column(name = "status")
+    private State state;
+
     public void updateRoutine(String name, ImportanceEnum importanceEnum, ColorEnum colorEnum){
         this.name = name;
         this.importanceEnum = importanceEnum;
         this.colorEnum = colorEnum;
+    }
+
+    public void setState(State state){
+        this.state = state;
     }
 }
