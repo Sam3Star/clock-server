@@ -30,4 +30,10 @@ public class RoutineEntity extends BaseTimeEntity {
 
     @Column(name = "color", nullable = false)
     private ColorEnum colorEnum;
+
+    public void updateRoutine(String name, ImportanceEnum importanceEnum, ColorEnum colorEnum){
+        this.name = name;
+        this.importanceEnum = importanceEnum;
+        this.colorEnum = colorEnum;
+    }
 }

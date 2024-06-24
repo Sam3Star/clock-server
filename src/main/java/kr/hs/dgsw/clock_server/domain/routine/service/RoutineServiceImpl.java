@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class RoutineServiceImpl implements RoutineService{
@@ -23,4 +25,18 @@ public class RoutineServiceImpl implements RoutineService{
                 .colorEnum(req.getColorEnum())
                 .build());
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void update(RoutineGenerateReq req, Long id) {
+        RoutineEntity routineEntity =  routineRepository.findById(id)
+                .orElseThrow(IllegalArgumentException::new);
+
+        routineEntity.updateRoutine(req.getName(), req.getImportanceEnum(), req.getColorEnum());
+
+        routineRepository.save(routineEntity);
+
+    }
+
+
 }
