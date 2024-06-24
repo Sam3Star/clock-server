@@ -2,7 +2,7 @@ name: CI/CD using github actions & docker
 
 on:
   push:
-    branches: [ "main" ] # 해당 branch에 푸쉬 발생 시 업데이트
+    branches: [ "main" ]
 
 jobs:
   CI-CD:
@@ -51,4 +51,8 @@ jobs:
             docker rm clock
             docker rmi ${{ secrets.DOCKER_USERNAME }}/clock:latest
             docker pull ${{ secrets.DOCKER_USERNAME }}/clock:latest
-            docker run -d -p 80:8080 --name clock ${{ secrets.DOCKER_USERNAME }}/clock:latest
+            docker run -d -p 80:8080 --name clock \
+              -e DB_URL=${{ secrets.DB_URL }} \
+              -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              ${{ secrets.DOCKER_USERNAME }}/clock:latest
