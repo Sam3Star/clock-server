@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class RoutineServiceImpl implements RoutineService{
         RoutineEntity routineEntity =  routineRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
 
-        routineEntity.updateRoutine(req.getName(), req.getImportanceEnum(), req.getColorEnum());
+        routineEntity.updateRoutine(req.getName(), req.getImportanceEnum(), req.getColorEnum(), req.getStartAt(), req.getEndAt());
 
         routineRepository.save(routineEntity);
     }
@@ -50,7 +51,7 @@ public class RoutineServiceImpl implements RoutineService{
 
     @Override
     public List<RoutineLoadRes> loadRoutine() {
-        List<RoutineEntity> routineEntity = routineRepository.findAll();
+        List<RoutineEntity> routineEntity = routineRepository.findByEndAtGreaterThanEqual(LocalDate.now());
 
         List<RoutineLoadRes> routineLoadResList = new ArrayList<>();
         for (RoutineEntity routine : routineEntity){
@@ -59,7 +60,6 @@ public class RoutineServiceImpl implements RoutineService{
                     routine.getImportanceEnum(),
                     routine.getColorEnum()));
         }
-
         return routineLoadResList;
     }
 
