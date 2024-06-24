@@ -38,8 +38,8 @@ jobs:
           envs: GITHUB_SHA
           script: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker stop java
-            docker rm java
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/java:latest
-            docker pull ${{ secrets.DOCKER_USERNAME }}/java:latest
-            docker run -d -p 80:8080 --name java ${{ secrets.DOCKER_USERNAME }}/java:latest
+            docker stop clock
+            docker rm clock
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/clock:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/clock:latest
+            docker run -d -p 80:8080 --name clock ${{ secrets.DOCKER_USERNAME }}/clock:latest
