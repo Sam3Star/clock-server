@@ -51,4 +51,4 @@ jobs:
             docker rm clock || true
             docker rmi ${{ secrets.DOCKER_USERNAME }}/clock:latest 
             docker pull ${{ secrets.DOCKER_USERNAME }}/clock:latest
-            docker run -d -p 80:8080 --name alimo ${{ secrets.DOCKER_USERNAME }}/alimo:latest
+            docker run -d -p 80:8080 --name clock ${{ secrets.DOCKER_USERNAME }}/clock:latest
