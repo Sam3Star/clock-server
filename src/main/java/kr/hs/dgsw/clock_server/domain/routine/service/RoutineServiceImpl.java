@@ -26,6 +26,8 @@ public class RoutineServiceImpl implements RoutineService{
                 .importanceEnum(req.getImportanceEnum())
                 .colorEnum(req.getColorEnum())
                 .state(State.active)
+                .startAt(req.getStartAt())
+                .endAt(req.getEndAt())
                 .build());
     }
 
