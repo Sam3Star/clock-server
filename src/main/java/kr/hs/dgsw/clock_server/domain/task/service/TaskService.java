@@ -10,8 +10,7 @@ import java.util.ArrayList;
 public interface TaskService {
     void editState(Long id);
     void delete(Long id);
-
     void register(TaskRequestDto taskRequestDto);
-
+    void edit(Long id, TaskRequestDto taskRequestDto);
     ArrayList<TaskDto> taskUpload(LocalDate date);
 }

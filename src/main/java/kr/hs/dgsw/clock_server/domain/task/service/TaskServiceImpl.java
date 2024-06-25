@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +32,21 @@ public class TaskServiceImpl implements TaskService{
                         .colorEnum(taskRequestDto.getColorEnum())
                         .build()
         );
+    }
+
+    @Override
+    public void edit(Long id, TaskRequestDto taskRequestDto) {
+        TaskEntity taskEntity = taskRepository.findTaskEntityById(id)
+                .orElseThrow(IllegalArgumentException::new);
+
+        taskEntity.changeTask(
+                taskRequestDto.getName(),
+                taskRequestDto.getImportanceEnum(),
+                taskRequestDto.getColorEnum(),
+                taskRequestDto.getDate()
+        );
+
+        taskRepository.save(taskEntity);
     }
 
     @Override

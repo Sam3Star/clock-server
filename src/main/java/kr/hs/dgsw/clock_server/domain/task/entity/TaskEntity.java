@@ -51,6 +51,12 @@ public class TaskEntity {
     /*
     일의 상태
      */
+    public void changeTask(String name, ImportanceEnum importanceEnum, ColorEnum colorEnum, LocalDate date){
+        this.name = name;
+        this.importanceEnum = importanceEnum;
+        this.colorEnum = colorEnum;
+        this.date = date;
+    }
 
     public void setStatus(State status){
         this.status = status;
