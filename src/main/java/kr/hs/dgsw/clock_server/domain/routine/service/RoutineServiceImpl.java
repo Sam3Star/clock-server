@@ -69,10 +69,13 @@ public class RoutineServiceImpl implements RoutineService{
 
         List<RoutineLoadRes> routineLoadResList = new ArrayList<>();
         for (RoutineEntity routine : routineEntity){
-            routineLoadResList.add(RoutineLoadRes.of(routine.getRoutineId(),
+            routineLoadResList.add(RoutineLoadRes.of(
+                    routine.getRoutineId(),
                     routine.getName(),
                     routine.getImportanceEnum(),
-                    routine.getColorEnum()));
+                    routine.getColorEnum(),
+                    routine.getState())
+            );
         }
         return routineLoadResList;
     }
