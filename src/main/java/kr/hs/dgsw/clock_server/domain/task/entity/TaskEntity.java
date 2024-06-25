@@ -51,4 +51,8 @@ public class TaskEntity {
     /*
     일의 상태
      */
+
+    public void setStatus(State status){
+        this.status = status;
+    }
 }
