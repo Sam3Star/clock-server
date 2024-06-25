@@ -53,14 +53,17 @@ public class RoutineServiceImpl implements RoutineService{
 
     @Override
     public List<RoutineLoadRes> loadRoutine() {
-        List<RoutineEntity> routineEntity = routineRepository.findByEndAtGreaterThanEqual(LocalDate.now());
+        List<RoutineEntity> routineEntity = routineRepository.findByDate(LocalDate.now());
 
         List<RoutineLoadRes> routineLoadResList = new ArrayList<>();
         for (RoutineEntity routine : routineEntity){
             routineLoadResList.add(RoutineLoadRes.of(routine.getRoutineId(),
                     routine.getName(),
                     routine.getImportanceEnum(),
-                    routine.getColorEnum()));
+                    routine.getColorEnum(),
+                    routine.getStartAt(),
+                    routine.getEndAt())
+            );
         }
         return routineLoadResList;
     }
