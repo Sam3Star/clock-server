@@ -2,6 +2,7 @@ package kr.hs.dgsw.clock_server.domain.routine.service;
 
 import kr.hs.dgsw.clock_server.domain.routine.entity.RoutineEntity;
 import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.req.RoutineGenerateReq;
+import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.res.RoutineGenerateRes;
 import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.res.RoutineLoadRes;
 import kr.hs.dgsw.clock_server.domain.routine.repository.RoutineRepository;
 import kr.hs.dgsw.clock_server.global.common.enums.State;
@@ -9,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +19,28 @@ public class RoutineServiceImpl implements RoutineService{
     private final RoutineRepository routineRepository;
 
     @Override
+    public void createDailyRoutine() {
+        List<RoutineEntity> routines = routineRepository.findAll();
+        for (RoutineEntity routine : routines) {
+            routineRepository.save(RoutineEntity.builder()
+                    .name(routine.getName())
+                    .importanceEnum(routine.getImportanceEnum())
+                    .colorEnum(routine.getColorEnum())
+                    .state(State.active)
+                    .build());
+        }
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
-    public void generate(RoutineGenerateReq req){
-        routineRepository.save(RoutineEntity.builder()
+    public RoutineGenerateRes generate(RoutineGenerateReq req){
+        RoutineEntity routineEntity = routineRepository.save(RoutineEntity.builder()
                 .name(req.getName())
                 .importanceEnum(req.getImportanceEnum())
                 .colorEnum(req.getColorEnum())
                 .state(State.active)
-                .startAt(req.getStartAt())
-                .endAt(req.getEndAt())
                 .build());
+        return RoutineGenerateRes.of(routineEntity.getRoutineId());
     }
 
     @Override
@@ -37,7 +49,7 @@ public class RoutineServiceImpl implements RoutineService{
         RoutineEntity routineEntity =  routineRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
 
-        routineEntity.updateRoutine(req.getName(), req.getImportanceEnum(), req.getColorEnum(), req.getStartAt(), req.getEndAt());
+        routineEntity.updateRoutine(req.getName(), req.getImportanceEnum(), req.getColorEnum());
 
         routineRepository.save(routineEntity);
     }
@@ -53,7 +65,7 @@ public class RoutineServiceImpl implements RoutineService{
 
     @Override
     public List<RoutineLoadRes> loadRoutine() {
-        List<RoutineEntity> routineEntity = routineRepository.findByEndAtGreaterThanEqual(LocalDate.now());
+        List<RoutineEntity> routineEntity = routineRepository.findAll();
 
         List<RoutineLoadRes> routineLoadResList = new ArrayList<>();
         for (RoutineEntity routine : routineEntity){

@@ -3,12 +3,12 @@ package kr.hs.dgsw.clock_server.domain.routine.presentation.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.req.RoutineGenerateReq;
+import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.res.RoutineGenerateRes;
 import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.res.RoutineLoadRes;
 import kr.hs.dgsw.clock_server.domain.routine.service.RoutineService;
 import kr.hs.dgsw.clock_server.global.reponse.Response;
 import kr.hs.dgsw.clock_server.global.reponse.ResponseData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +23,10 @@ public class RoutineController {
 
     @PostMapping()
     @Operation(summary = "generate routine", description = "generate routine")
-    public Response generate(
+    public ResponseData<RoutineGenerateRes> generate(
             @RequestBody RoutineGenerateReq req
             ){
-        routineService.generate(req);
-        return Response.of(HttpStatus.CREATED, "생성성공");
+        return ResponseData.of(HttpStatus.CREATED, "생성성공", routineService.generate(req));
     }
 
     @PatchMapping("/{id}")
