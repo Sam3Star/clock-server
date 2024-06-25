@@ -11,5 +11,6 @@ import java.util.List;
 
 @Repository
 public interface RoutineRepository extends JpaRepository<RoutineEntity, Long> {
-    List<RoutineEntity> findByEndAtGreaterThanEqual(LocalDate endAt);
+    @Query("select o from RoutineEntity o where :date between o.startAt and o.endAt")
+    List<RoutineEntity> findByDate(@Param("date") LocalDate date);
 }
