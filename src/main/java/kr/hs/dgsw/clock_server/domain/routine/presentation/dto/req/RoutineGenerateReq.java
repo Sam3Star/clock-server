@@ -15,6 +15,6 @@ public class RoutineGenerateReq{
         String name;
         ImportanceEnum importanceEnum;
         ColorEnum colorEnum;
-        LocalDate startAt;
-        LocalDate endAt;
+//        LocalDate startAt;
+//        LocalDate endAt;
 }

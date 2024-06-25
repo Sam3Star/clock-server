@@ -9,16 +9,14 @@ public record RoutineLoadRes(
         Long id,
         String name,
         ImportanceEnum importanceEnum,
-        ColorEnum colorEnum,
-        LocalDate startAt,
-        LocalDate endAt
+        ColorEnum colorEnum
+//        LocalDate startAt,
+//        LocalDate endAt
 ) {
     public static RoutineLoadRes of(Long id,
                                     String name,
                                     ImportanceEnum importanceEnum,
-                                    ColorEnum colorEnum,
-                                    LocalDate startAt,
-                                    LocalDate endAt){
-        return new RoutineLoadRes(id, name, importanceEnum, colorEnum, startAt, endAt);
+                                    ColorEnum colorEnum){
+        return new RoutineLoadRes(id, name, importanceEnum, colorEnum);
     }
 }
