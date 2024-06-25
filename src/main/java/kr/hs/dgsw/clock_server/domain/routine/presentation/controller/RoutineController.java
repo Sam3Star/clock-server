@@ -9,7 +9,6 @@ import kr.hs.dgsw.clock_server.domain.routine.service.RoutineService;
 import kr.hs.dgsw.clock_server.global.reponse.Response;
 import kr.hs.dgsw.clock_server.global.reponse.ResponseData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +26,7 @@ public class RoutineController {
     public ResponseData<RoutineGenerateRes> generate(
             @RequestBody RoutineGenerateReq req
             ){
-        return ResponseData.of(HttpStatus.CREATED, "생성성공", routineService.generate(req););
+        return ResponseData.of(HttpStatus.CREATED, "생성성공", routineService.generate(req));
     }
 
     @PatchMapping("/{id}")

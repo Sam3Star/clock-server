@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +39,6 @@ public class RoutineServiceImpl implements RoutineService{
                 .importanceEnum(req.getImportanceEnum())
                 .colorEnum(req.getColorEnum())
                 .state(State.active)
-//                .startAt(req.getStartAt())
-//                .endAt(req.getEndAt())
                 .build());
         return RoutineGenerateRes.of(routineEntity.getRoutineId());
     }
