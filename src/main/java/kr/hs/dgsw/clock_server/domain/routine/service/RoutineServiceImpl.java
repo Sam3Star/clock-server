@@ -2,6 +2,7 @@ package kr.hs.dgsw.clock_server.domain.routine.service;
 
 import kr.hs.dgsw.clock_server.domain.routine.entity.RoutineEntity;
 import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.req.RoutineGenerateReq;
+import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.res.RoutineGenerateRes;
 import kr.hs.dgsw.clock_server.domain.routine.presentation.dto.res.RoutineLoadRes;
 import kr.hs.dgsw.clock_server.domain.routine.repository.RoutineRepository;
 import kr.hs.dgsw.clock_server.global.common.enums.State;
@@ -33,8 +34,8 @@ public class RoutineServiceImpl implements RoutineService{
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void generate(RoutineGenerateReq req){
-        routineRepository.save(RoutineEntity.builder()
+    public RoutineGenerateRes generate(RoutineGenerateReq req){
+        RoutineEntity routineEntity = routineRepository.save(RoutineEntity.builder()
                 .name(req.getName())
                 .importanceEnum(req.getImportanceEnum())
                 .colorEnum(req.getColorEnum())
@@ -42,6 +43,7 @@ public class RoutineServiceImpl implements RoutineService{
 //                .startAt(req.getStartAt())
 //                .endAt(req.getEndAt())
                 .build());
+        return RoutineGenerateRes.of(routineEntity.getRoutineId());
     }
 
     @Override
