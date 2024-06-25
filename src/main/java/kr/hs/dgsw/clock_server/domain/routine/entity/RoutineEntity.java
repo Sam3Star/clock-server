@@ -40,20 +40,10 @@ public class RoutineEntity extends BaseTimeEntity {
     @Column(name = "status")
     private State state;
 
-//    @NotNull
-//    @Column(name = "start_at")
-//    private LocalDate startAt;
-//
-//    @NotNull
-//    @Column(name = "end_at")
-//    private LocalDate endAt;
-
     public void updateRoutine(String name, ImportanceEnum importanceEnum, ColorEnum colorEnum){
         this.name = name;
         this.importanceEnum = importanceEnum;
         this.colorEnum = colorEnum;
-//        this.startAt = startAt;
-//        this.endAt = endAt;
     }
 
     public void setState(State state){
