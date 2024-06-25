@@ -1,7 +1,6 @@
 package kr.hs.dgsw.clock_server.domain.routine.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import kr.hs.dgsw.clock_server.global.common.entity.BaseTimeEntity;
 import kr.hs.dgsw.clock_server.global.common.enums.ColorEnum;
 import kr.hs.dgsw.clock_server.global.common.enums.ImportanceEnum;
@@ -12,8 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicUpdate;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "tbl_routine")
@@ -43,20 +40,20 @@ public class RoutineEntity extends BaseTimeEntity {
     @Column(name = "status")
     private State state;
 
-    @NotNull
-    @Column(name = "start_at")
-    private LocalDate startAt;
+//    @NotNull
+//    @Column(name = "start_at")
+//    private LocalDate startAt;
+//
+//    @NotNull
+//    @Column(name = "end_at")
+//    private LocalDate endAt;
 
-    @NotNull
-    @Column(name = "end_at")
-    private LocalDate endAt;
-
-    public void updateRoutine(String name, ImportanceEnum importanceEnum, ColorEnum colorEnum, LocalDate startAt, LocalDate endAt){
+    public void updateRoutine(String name, ImportanceEnum importanceEnum, ColorEnum colorEnum){
         this.name = name;
         this.importanceEnum = importanceEnum;
         this.colorEnum = colorEnum;
-        this.startAt = startAt;
-        this.endAt = endAt;
+//        this.startAt = startAt;
+//        this.endAt = endAt;
     }
 
     public void setState(State state){

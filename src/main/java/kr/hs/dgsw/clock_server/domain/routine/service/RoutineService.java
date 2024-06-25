@@ -7,6 +7,7 @@ import kr.hs.dgsw.clock_server.global.common.enums.State;
 import java.util.List;
 
 public interface RoutineService {
+    void createDailyRoutine();
     void generate(RoutineGenerateReq req);
     void update(RoutineGenerateReq req, Long id);
     void delete(Long id);
