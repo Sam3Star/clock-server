@@ -44,9 +44,11 @@ public class RoutineEntity extends BaseTimeEntity {
     private State state;
 
     @NotNull
+    @Column(name = "start_at")
     private LocalDate startAt;
 
     @NotNull
+    @Column(name = "end_at")
     private LocalDate endAt;
 
     public void updateRoutine(String name, ImportanceEnum importanceEnum, ColorEnum colorEnum, LocalDate startAt, LocalDate endAt){
