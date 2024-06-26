@@ -13,6 +13,6 @@ import java.util.List;
 
 @Repository
 public interface RoutineRepository extends JpaRepository<RoutineEntity, Long> {
-    @Query("SELECT r FROM RoutineEntity r WHERE r.modifiedDateTime = :today")
-    List<RoutineEntity> findModifiedToday(@Param("today") LocalDateTime today);
+    @Query("SELECT r FROM RoutineEntity r WHERE r.modifiedDate = :today")
+    List<RoutineEntity> findModifiedToday(@Param("today") LocalDate today);
 }
