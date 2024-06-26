@@ -67,7 +67,7 @@ public class RoutineServiceImpl implements RoutineService{
 
     @Override
     public List<RoutineLoadRes> loadRoutine() {
-        List<RoutineEntity> routineEntity = routineRepository.findModifiedToday(LocalDateTime.now());
+        List<RoutineEntity> routineEntity = routineRepository.findModifiedToday(LocalDate.now());
 
         List<RoutineLoadRes> routineLoadResList = new ArrayList<>();
         for (RoutineEntity routine : routineEntity){
