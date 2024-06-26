@@ -21,9 +21,9 @@ import java.time.LocalDateTime;
 public abstract class BaseTimeEntity {
     @CreatedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    protected LocalDateTime createdDate;
+    protected LocalDateTime createdDateTime;
 
     @LastModifiedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    protected LocalDateTime modifiedDate;
+    protected LocalDateTime modifiedDateTime;
 }

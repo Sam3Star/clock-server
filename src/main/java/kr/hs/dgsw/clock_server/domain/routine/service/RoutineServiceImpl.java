@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +67,7 @@ public class RoutineServiceImpl implements RoutineService{
 
     @Override
     public List<RoutineLoadRes> loadRoutine() {
-        List<RoutineEntity> routineEntity = routineRepository.findAll();
+        List<RoutineEntity> routineEntity = routineRepository.findModifiedToday(LocalDateTime.now());
 
         List<RoutineLoadRes> routineLoadResList = new ArrayList<>();
         for (RoutineEntity routine : routineEntity){
